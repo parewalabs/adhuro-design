@@ -65,17 +65,16 @@
 			</h3>
 		</header>
 
-		<section class="container interactive-slideshow">
+		<section class="container how-adhuro-works-slideshow">
 			<div class="grid__col--8">
-				<img src="img/video_placeholder.jpg" class="interactive-slideshow__media--active img--hero">
-				<img src="img/video_placeholder.jpg" class="interactive-slideshow__media img--hero">
-				<img src="img/video_placeholder.jpg" class="interactive-slideshow__media img--hero">
-				<img src="img/video_placeholder.jpg" class="interactive-slideshow__media img--hero">
+				<img src="img/video_placeholder.jpg" class="how-adhuro-works-media img--hero">
+				<img src="img/PK poster.jpg" class="how-adhuro-works-media img--hero">
+				<img src="img/video_placeholder.jpg" class="how-adhuro-works-media img--hero">
 			</div>
 			<div class="grid__col--4">
-				<div class="interactive-slideshow__nav--active">Write Content</div>
-				<div class="interactive-slideshow__nav">Get Famous</div>
-				<div class="interactive-slideshow__nav">Get Paid</div>
+				<div class="how-adhuro-works-link">Write Content</div>
+				<div class="how-adhuro-works-link">Get Famous</div>
+				<div class="how-adhuro-works-link">Get Paid</div>
 			</div>
 		</section>
 
@@ -83,9 +82,8 @@
 			<h3>What users say?</h3>
 		</header>
 
-		<section class="container slider">
-			<div class="slider__container">
-				<div class="slider__content">
+		<section class="container user-reviews-slider">
+				<div class="user-review">
 					<div class="grid__col--3">
 						<img class="img--avatar" src="img/avatar.jpg">
 					</div>
@@ -98,7 +96,7 @@
 						</h4>
 					</div>
 				</div>
-				<div class="slider__content">
+				<div class="user-review">
 					<div class="grid__col--3">
 						<img class="img--avatar" src="img/avatar.jpg">
 					</div>
@@ -112,7 +110,7 @@
 						</h4>
 					</div>
 				</div>
-				<div class="slider__content">
+				<div class="user-review">
 					<div class="grid__col--3">
 						<img class="img--avatar" src="img/avatar.jpg">
 					</div>
@@ -126,7 +124,7 @@
 						</h4>
 					</div>
 				</div>
-				<div class="slider__content">
+				<div class="user-review">
 					<div class="grid__col--3">
 						<img class="img--avatar" src="img/avatar.jpg">
 					</div>
@@ -138,7 +136,6 @@
 								Punit Jajodia, CTO, Parewa Labs
 						</h4>
 					</div>
-				</div>
 			</div>
 		</section>
 	</main>
@@ -172,40 +169,78 @@
 	</script>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			
+		var PAREWA = {};
+
+		PAREWA.slider = function(containerSelector, contentSelector){
+			$container = $(containerSelector);
+			$content = $(containerSelector + " " + contentSelector);
+
+			var pseudo = document.createElement("div");
+			$pseudo = $(pseudo);
+
+			$container.addClass("slider");
+
+			//This element has to be given overflow hidden because all of the elements inside
+			//it are floated left so they won't get any height unless this is done.
+			$pseudo.addClass("slider__container");
+			$content.addClass("slider__content");
+
 			var slider = {
 				current: 0,
-				width : parseInt($(".slider .slider__content").first().width(), 10),
-				numSlides : parseInt($(".slider .slider__content").length, 10) //assuming one is active
+				numSlides : parseInt($content.length, 10) //assuming one is active
 			};
 
-			$(".slider").css({
-				width: slider.width + "px"
+			$container.contents().appendTo(pseudo);
+
+			$pseudo.appendTo($container);
+
+			$(pseudo).css({
+				width : (100 * slider.numSlides) + "%"
 			});
 
-			$(".slider__container").css({
-				width : (slider.width * slider.numSlides) + "px"
+			$content.css({
+				width : (100 / slider.numSlides) + "%"
 			});
-
 
 
 			slider.animate = function() {
 				var next = (slider.current + 1) % slider.numSlides;
-				var marginLeft = slider.width * next;
 				slider.current = next;
-				console.log(marginLeft);
-
-
-				 $('.slider__container').animate({
-            			marginLeft: -1 * marginLeft + "px"
-        		}, 500);
+				$pseudo.animate({
+	        			marginLeft: (-100 * next) +  "%"
+	    		}, 500);
 			};
 
 			setInterval(function () {
         		slider.animate();
     		}, 3000);
 
+		}
+
+		PAREWA.interactiveSlideShow = function(containerSelector, mediaSelector, navSelector){
+			$container = $(containerSelector);
+			$media = $(containerSelector + " " + mediaSelector);
+			$nav = $(containerSelector + " " + navSelector);
+
+			$container.addClass("interactive-slideshow");
+			$media.addClass("interactive-slideshow__media");
+			$($media[0]).addClass("interactive-slideshow__media--active");
+			$nav.addClass("interactive-slideshow__nav");
+			$($nav[0]).addClass("interactive-slideshow__nav--active");
+
+			$nav.click(function(){
+				var index = $(this).index();
+				$media.removeClass("interactive-slideshow__media--active");
+				$nav.removeClass("interactive-slideshow__nav--active");
+				$($media[index]).addClass("interactive-slideshow__media--active");
+				$(this).addClass("interactive-slideshow__nav--active");
+			});
+		}
+		
+
+		$(document).ready(function() {
+			PAREWA.slider(".user-reviews-slider", ".user-review");			
+			PAREWA.interactiveSlideShow(".how-adhuro-works-slideshow", ".how-adhuro-works-media", ".how-adhuro-works-link");
 		});
 
 	</script>

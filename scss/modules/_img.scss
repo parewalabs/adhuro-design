@@ -10,9 +10,7 @@
 	@include m(avatar) {
 		@extend .center-align;
 		@extend .centered;
-		max-width: em(200px);
 		border-radius : $br--round;
-		
 	}
 
 	@include m(hero) {

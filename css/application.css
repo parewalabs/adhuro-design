@@ -5,7 +5,7 @@
   clear: both; }
 
 .centered, .centered--vertical, .badge, .img--avatar, .container {
-  float: none;
+  display: block;
   margin-left: auto;
   margin-right: auto; }
 
@@ -404,7 +404,6 @@ h2, .headline-secondary--grouped, .headline-secondary {
   border: 1px solid #d6d7d9;
   padding: 0.75em; }
 .img--avatar {
-  max-width: 12.5em;
   border-radius: 50%; }
 .img--hero {
   margin-bottom: 2.625em;
@@ -427,8 +426,7 @@ h2, .headline-secondary--grouped, .headline-secondary {
   .slider__container {
     overflow: hidden; }
   .slider__content {
-    float: left;
-    width: 1050px; }
+    float: left; }
 
 .badge {
   color: #fff;
