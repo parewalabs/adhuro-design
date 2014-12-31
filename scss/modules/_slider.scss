@@ -1,0 +1,13 @@
+.slider {
+	overflow: hidden;
+	
+
+	@include e(container) {
+		overflow: hidden;
+	}
+
+	@include e(content) {
+		float: left;
+		width: 1050px;
+	}
+}

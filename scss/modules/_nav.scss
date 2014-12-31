@@ -1,0 +1,45 @@
+// ==========================================================================
+// Nav
+// =========================================================================
+
+.nav {
+	margin-bottom : em(30px);
+
+	@include e(item) {
+		@extend %nav-item-disp;
+		a {
+			@extend %nav-item-link;
+			color: palette(grey);
+			&:hover {
+				@extend %nav-item-on;
+			}
+		}
+
+		@include m(current) {
+			@extend %nav-item-disp;
+			a {
+				@extend %nav-item-link; 
+				@extend %nav-item-on;
+			}
+		}
+	}
+}
+
+
+.footer-nav {
+	padding: em(15px);
+
+	@include e(header){
+		color: palette(grey, xx-light);
+	}
+
+	@include e(item){
+		display: block;
+		
+		a {
+			@extend %clickable;
+			color: $white; 
+			font-size: em(14px);
+		}
+	}
+}

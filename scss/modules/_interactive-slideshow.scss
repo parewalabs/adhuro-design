@@ -1,0 +1,21 @@
+.interactive-slideshow {
+	
+	@include e(media){
+		display: none;
+
+		@include m(active) {
+			display: block;
+		}
+	}
+
+	@include e(nav) {
+		@extend %interactive-slideshow__nav;
+		opacity: 0.5;
+
+		@include m(active){
+			@extend %interactive-slideshow__nav;
+			opacity: 1;
+		}
+	}
+
+}

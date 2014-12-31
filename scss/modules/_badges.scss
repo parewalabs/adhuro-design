@@ -1,0 +1,12 @@
+.badge {
+	@extend .center-align;
+	@extend .centered--vertical;
+	color     : $white;
+	background: $color-primary;
+	height:    $badge-size;
+	width: 	$badge-size;
+	max-width: em(200px);
+	line-height:  $badge-size;
+	border-radius : $br--round;
+	font-size: $badge-size;
+}
